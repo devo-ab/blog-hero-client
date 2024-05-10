@@ -1,8 +1,15 @@
+import { motion, useScroll } from "framer-motion"
+import Banner from "./Banner";
+
 const Home = () => {
+
+    const { scrollYProgress } = useScroll();
+
     return (
-        <div>
-            <h1>This Is Home</h1>
-        </div>
+        <motion.div>
+            <motion.div style={{ scaleX: scrollYProgress }} /> 
+            <Banner></Banner>
+        </motion.div>
     );
 };
 

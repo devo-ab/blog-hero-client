@@ -149,13 +149,13 @@ const handleGithubSignIn = () => {
       </div>
       <p className="text-xs text-center sm:px-6">
         Don't have an account?
-        <Link to="/signUp"><a
+        <Link to="/signUp"><p
           rel="noopener noreferrer"
           href="#"
           className="underline"
         >
           Sign up
-        </a></Link>
+        </p></Link>
       </p>
       <ToastContainer />
     </div>

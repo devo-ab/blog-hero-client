@@ -1,8 +1,8 @@
 import { Button } from "flowbite-react";
 
-const AddBlog = () => {
+const UpdateBlog = () => {
 
-    const handleSubmit = (e) => {
+    const handleUpdate = (e) => {
         e.preventDefault();
         const form = e.target;
         const title = form.title.value;
@@ -13,13 +13,13 @@ const AddBlog = () => {
         console.log(title, category, imageUrl, shortDes, longDes)
     };
 
-  return (
-    <div className="mt-10">
+    return (
+        <div className="mt-10">
       <h1 className="text-4xl font-bold text-center">Add Blog</h1>
 
       {/* from start */}
       <section className="p-6">
-        <form onSubmit={handleSubmit} className="container flex flex-col mx-auto space-y-12">
+        <form onSubmit={handleUpdate} className="container flex flex-col mx-auto space-y-12">
           <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md">
             
             <div className="grid grid-cols-6 gap-4 col-span-full">
@@ -95,7 +95,7 @@ const AddBlog = () => {
       </section>
       {/* from end */}
     </div>
-  );
+    );
 };
 
-export default AddBlog;
+export default UpdateBlog;

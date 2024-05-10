@@ -1,11 +1,24 @@
-import { Button } from "flowbite-react";
-import { useLoaderData } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Button, Spinner } from "flowbite-react";
+import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const UpdateBlog = () => {
 
-  const blogData = useLoaderData();
-  const {_id, title, category, imageUrl, shortDes, longDes} = blogData;
+  const {id} = useParams();
+
+  const { isPending, data } = useQuery({
+    queryKey: ["blogs data"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/blogs/${id}`);
+      return res.json();
+    },
+  });
+  if (isPending) {
+    return <Spinner color="purple" aria-label="Purple spinner example" />;
+  }
+
+
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -19,7 +32,7 @@ const UpdateBlog = () => {
 
         const updatedBlogs = {title, category, imageUrl, shortDes, longDes};
 
-        fetch(`http://localhost:5000/blogsUpdate/${_id}`,{
+        fetch(`http://localhost:5000/blogsUpdate/${id}`,{
           method: "PUT",
           headers:{
             'content-type' : 'application/json'
@@ -57,7 +70,7 @@ const UpdateBlog = () => {
                 <input
                   id="title"
                   name="title"
-                  defaultValue={title}
+                  defaultValue={data.title}
                   type="text"
                   placeholder="Blog Title Here"
                   className="w-full rounded-md"
@@ -67,7 +80,7 @@ const UpdateBlog = () => {
                 <label htmlFor="category" className="font-medium">
                   Category
                 </label>
-                <select name="category" defaultValue={category} id="category" className="w-full rounded-md">
+                <select name="category" defaultValue={data.category} id="category" className="w-full rounded-md">
                     <option value="Lifestyle">Lifestyle</option>
                     <option value="Technology">Technology</option>
                     <option value="Food and Cooking">Food and Cooking</option>
@@ -82,7 +95,7 @@ const UpdateBlog = () => {
                 </label>
                 <input
                   id="imageUrl"
-                  defaultValue={imageUrl}
+                  defaultValue={data.imageUrl}
                   name="imageUrl"
                   type="text"
                   placeholder="Image Url Here"
@@ -96,7 +109,7 @@ const UpdateBlog = () => {
                 </label>
                 <textarea
                   id="shortDes"
-                  defaultValue={shortDes}
+                  defaultValue={data.shortDes}
                   name="shortDes"
                   type="text"
                   placeholder="Write Short Description"
@@ -111,7 +124,7 @@ const UpdateBlog = () => {
                 <textarea
                   id="longDes"
                   name="longDes"
-                  defaultValue={longDes}
+                  defaultValue={data.longDes}
                   type="text"
                   rows={8}
                   placeholder="Write Long Description"

@@ -18,6 +18,67 @@ import { Tooltip } from "react-tooltip";
 const NavbarIs = () => {
   const { user, logOut } = useContext(AuthContext);
 
+  const navLinks = (
+    <div className="lg:space-x-5  md:space-y-0 flex flex-col lg:flex-row items-center">
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          isActive
+            ? "text-white md:text-lg font-medium border border-[#4D869C] bg-[#FFF2D7] rounded-md md:px-3 md:py-1 text-center"
+            : "text-center"
+        }
+      >
+        <NavbarLink>Home</NavbarLink>
+      </NavLink>
+
+      <NavLink
+        to="/addblog"
+        className={({ isActive }) =>
+          isActive
+            ? "text-base-content md:text-lg font-medium border border-[#4D869C] bg-[#FFF2D7] rounded-md md:px-3 md:py-1 text-center"
+            : "text-base-content text-center"
+        }
+      >
+        <NavbarLink>Add Blog</NavbarLink>
+      </NavLink>
+
+      <NavLink
+        to="/allblogs"
+        className={({ isActive }) =>
+          isActive
+            ? "text-base-content md:text-lg font-medium border border-[#4D869C] bg-[#FFF2D7] rounded-md md:px-3 md:py-1 text-center"
+            : "text-base-content text-center"
+        }
+      >
+        <NavbarLink>All Blogs</NavbarLink>
+      </NavLink>
+
+      <NavLink
+        to="/featured"
+        className={({ isActive }) =>
+          isActive
+            ? "text-base-content md:text-lg font-medium border border-[#4D869C] bg-[#FFF2D7] rounded-md md:px-3 md:py-1 text-center"
+            : "text-base-content text-center"
+        }
+      >
+        <NavbarLink>Featured</NavbarLink>
+      </NavLink>
+
+      {user && (
+        <NavLink
+          to="/wishlist"
+          className={({ isActive }) =>
+            isActive
+              ? "text-white md:text-lg font-medium border border-[#4D869C] bg-[#FFF2D7] rounded-md md:px-3 md:py-1 text-center"
+              : "text-base-content text-center"
+          }
+        >
+          <NavbarLink>Wishlist</NavbarLink>
+        </NavLink>
+      )}
+    </div>
+  );
+
   const handleSingOut = () => {
     logOut()
       .then((result) => {
@@ -34,7 +95,7 @@ const NavbarIs = () => {
     <Navbar fluid rounded>
       <NavbarBrand href="/">
         <img src="/blog-hero-logo.png" className="mr-3 h-6 sm:h-9" alt="Blog Hero Logo" />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+        <span className="self-center whitespace-nowrap lg:text-2xl lg:font-bold dark:text-white">
           Blog Hero
         </span>
       </NavbarBrand>
@@ -63,15 +124,7 @@ const NavbarIs = () => {
 
         <NavbarToggle />
       </div>
-      <NavbarCollapse>
-        <NavbarLink href="/" active>
-          Home
-        </NavbarLink>
-        <NavbarLink href="#">Add Blog</NavbarLink>
-        <NavbarLink href="#">All Blogs</NavbarLink>
-        <NavbarLink href="#">Featured</NavbarLink>
-        <NavbarLink href="#">Wishlist</NavbarLink>
-      </NavbarCollapse>
+      <NavbarCollapse>{navLinks}</NavbarCollapse>
       <Tooltip id="my-tooltip" />
       <ToastContainer />
     </Navbar>

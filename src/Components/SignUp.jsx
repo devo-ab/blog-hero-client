@@ -10,6 +10,8 @@ const SignUp = () => {
   const { createUserWithEmailPass } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
 
+
+
   const handleSingUp = (e) => {
     e.preventDefault();
     const name = e.target.name.value;

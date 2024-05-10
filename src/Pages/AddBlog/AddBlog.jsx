@@ -1,6 +1,11 @@
 import { Button } from "flowbite-react";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProviders";
+import Swal from 'sweetalert2'
 
 const AddBlog = () => {
+
+  const {user} = useContext(AuthContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -10,7 +15,31 @@ const AddBlog = () => {
         const imageUrl = form.imageUrl.value;
         const shortDes = form.shortDes.value;
         const longDes = form.longDes.value;
-        console.log(title, category, imageUrl, shortDes, longDes)
+        const email = user.email;
+        
+        const blogs = {title, category, imageUrl, shortDes, longDes, email};
+        console.log(blogs)
+
+        fetch('http://localhost:5000/addblogs',{
+          method: "POST",
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(blogs)
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          if(data.insertedId){
+            Swal.fire({
+              title: 'Success!',
+              text: 'Blog Added Successfully',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            })
+          }
+          form.reset();
+        })
     };
 
   return (

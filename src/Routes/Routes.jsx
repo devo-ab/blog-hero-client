@@ -8,43 +8,56 @@ import AddBlog from "../Pages/AddBlog/AddBlog";
 import AllBlogs from "../Pages/AllBlogs/AllBlogs";
 import Featured from "../Pages/Featured/Featured";
 import WishList from "../Pages/WishList/WishList";
+import PrivateRoutes from "./PrivateRoutes";
+import Details from "../Pages/Details/Details";
+import UpdateBlog from "../Pages/UpdateBlog/UpdateBlog";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Layouts></Layouts>,
-      errorElement: <ErrorPages></ErrorPages>,
-      children:[
-        {
-            path: "/",
-            element: <Home></Home>
-        },
-        {
-            path: "/signIn",
-            element: <SignIn></SignIn>
-        },
-        {
-            path: "/signUp",
-            element: <SignUp></SignUp>
-        },
-        {
-          path: "/addblog",
-          element: <AddBlog></AddBlog>
-        },
-        {
-          path: "/allblogs",
-          element: <AllBlogs></AllBlogs>
-        },
-        {
-          path: "/featured",
-          element: <Featured></Featured>
-        },
-        {
-          path: "/wishlist",
-          element: <WishList></WishList>
-        }
-      ]
-    },
-  ]);
+  {
+    path: "/",
+    element: <Layouts></Layouts>,
+    errorElement: <ErrorPages></ErrorPages>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/signIn",
+        element: <SignIn></SignIn>,
+      },
+      {
+        path: "/signUp",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "/addblog",
+        element: <PrivateRoutes><AddBlog></AddBlog></PrivateRoutes>,
+      },
+      {
+        path: "/allblogs",
+        element: <AllBlogs></AllBlogs>,
+      },
+      {
+        path: "/featured",
+        element: <Featured></Featured>,
+      },
+      {
+        path: "/wishlist",
+        element: <WishList></WishList>,
+      },
+      {
+        path: "/details/:id",
+        element: <Details></Details>,
+        loader: ({params}) => fetch(`http://localhost:5000/blogs/${params.id}`)
+      },
+      {
+        path: "/update/:id",
+        element: <PrivateRoutes><UpdateBlog></UpdateBlog></PrivateRoutes>,
+        loader: ({params}) => fetch(`http://localhost:5000/blogs/${params.id}`)
+      }
+    ],
+  },
+]);
 
-  export default router;
+export default router;

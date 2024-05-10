@@ -1,6 +1,11 @@
 import { Button } from "flowbite-react";
+import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateBlog = () => {
+
+  const blogData = useLoaderData();
+  const {_id, title, category, imageUrl, shortDes, longDes} = blogData;
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -11,11 +16,33 @@ const UpdateBlog = () => {
         const shortDes = form.shortDes.value;
         const longDes = form.longDes.value;
         console.log(title, category, imageUrl, shortDes, longDes)
+
+        const updatedBlogs = {title, category, imageUrl, shortDes, longDes};
+
+        fetch(`http://localhost:5000/blogsUpdate/${_id}`,{
+          method: "PUT",
+          headers:{
+            'content-type' : 'application/json'
+          },
+          body: JSON.stringify(updatedBlogs)
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          if(data.modifiedCount){
+            Swal.fire({
+              title: 'Success!',
+              text: 'Blog Update Successfully',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            })
+          }
+        })
     };
 
     return (
         <div className="mt-10">
-      <h1 className="text-4xl font-bold text-center">Add Blog</h1>
+      <h1 className="text-4xl font-bold text-center">Update Your Blog</h1>
 
       {/* from start */}
       <section className="p-6">
@@ -30,6 +57,7 @@ const UpdateBlog = () => {
                 <input
                   id="title"
                   name="title"
+                  defaultValue={title}
                   type="text"
                   placeholder="Blog Title Here"
                   className="w-full rounded-md"
@@ -39,7 +67,7 @@ const UpdateBlog = () => {
                 <label htmlFor="category" className="font-medium">
                   Category
                 </label>
-                <select name="category" id="category" className="w-full rounded-md">
+                <select name="category" defaultValue={category} id="category" className="w-full rounded-md">
                     <option value="Lifestyle">Lifestyle</option>
                     <option value="Technology">Technology</option>
                     <option value="Food and Cooking">Food and Cooking</option>
@@ -54,6 +82,7 @@ const UpdateBlog = () => {
                 </label>
                 <input
                   id="imageUrl"
+                  defaultValue={imageUrl}
                   name="imageUrl"
                   type="text"
                   placeholder="Image Url Here"
@@ -67,6 +96,7 @@ const UpdateBlog = () => {
                 </label>
                 <textarea
                   id="shortDes"
+                  defaultValue={shortDes}
                   name="shortDes"
                   type="text"
                   placeholder="Write Short Description"
@@ -81,13 +111,14 @@ const UpdateBlog = () => {
                 <textarea
                   id="longDes"
                   name="longDes"
+                  defaultValue={longDes}
                   type="text"
                   rows={8}
                   placeholder="Write Long Description"
                   className="w-full rounded-md"
                 />
               </div>
-              <Button type="submit" className="col-span-full">Submit</Button>
+              <Button type="submit" className="col-span-full">Update</Button>
               
             </div>
           </fieldset> 

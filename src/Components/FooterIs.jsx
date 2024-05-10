@@ -13,11 +13,11 @@ import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-
 const FooterIs = () => {
   return (
     <Footer container>
-      <div className="w-full">
+      <div className="w-full mt-10">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div>
             <FooterBrand
-              href="https://flowbite.com"
+              href="#"
               src="/blog-hero-logo.png"
               alt="Blog Hero Logo"
               name="Blog Hero"

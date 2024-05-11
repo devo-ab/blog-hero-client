@@ -1,9 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { Button, Spinner } from "flowbite-react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProviders";
+import Swal from "sweetalert2";
 
 
 const AllBlogs = () => {
+
+  const {user} = useContext(AuthContext);
 
   const {isPending, data} = useQuery({
     queryKey: ['blogs'],
@@ -24,6 +29,38 @@ const AllBlogs = () => {
     e.preventDefault();
     const title = e.target.search.value;
     console.log(title)
+  };
+
+  const handleWishlist = (d) => {
+    const title = d.title;
+    const imageUrl = d.imageUrl;
+    const category = d.category;
+    const shortDes = d.shortDes;
+    const blog_id = d._id;
+    const userEmail = user?.email;
+
+    const wishlist = {title, imageUrl, category, shortDes, userEmail, blog_id};
+    console.log(wishlist)
+
+    fetch('http://localhost:5000/wishlist',{
+      method: "POST",
+      headers:{
+        'content-type' : 'application/json'
+      },
+      body: JSON.stringify(wishlist)
+    })
+    .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          if(data.insertedId){
+            Swal.fire({
+              title: 'Success!',
+              text: 'Added Wishlist Successfully',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            })
+          }
+        })
   };
 
   if(isPending){
@@ -77,7 +114,7 @@ const AllBlogs = () => {
               {/* button */}
               <div className="flex gap-4 mt-1">
               <Link to={`/details/${d._id}`}><Button>Details</Button></Link>
-              <Button>Wishlist</Button>
+              <Button onClick={() => handleWishlist(d)}>Wishlist</Button>
               </div>
             </div>
           </div>))

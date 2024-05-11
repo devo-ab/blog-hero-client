@@ -1,9 +1,86 @@
+import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProviders";
+import { Button, Spinner } from "flowbite-react";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+
 const WishList = () => {
-    return (
-        <div>
-            <h1>Wishlist page</h1>
+  const { user } = useContext(AuthContext);
+  // const userEmail = user?.email;
+
+  const { isPending, data } = useQuery({
+    queryKey: ["wishlist"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/wishlist/${user?.email}`);
+      return res.json();
+    },
+  });
+
+  const handleRemove = (id) => {
+    console.log(id)
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          console.log("delete confirm");
+          fetch(`http://localhost:5000/wishlist/${id}`, {
+            method: "DELETE",
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              if (data.deletedCount > 0) {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your file has been deleted.",
+                  icon: "success",
+                });
+              }
+            });
+        }
+      });
+  };
+
+  if (isPending) {
+    return <Spinner color="purple" aria-label="Purple spinner example" />;
+  }
+
+  return (
+    <div className="mt-10">
+      {data.map((d) => (
+        <div className="border-2 border-[#4D869C] mb-2 p-2 rounded-md" key={d._id}>
+          <div className="flex flex-col md:flex-row">
+
+            <div className="flex flex-col md:flex-row gap-3">
+              <img className="w-48 rounded-md" src={d.imageUrl} alt="" />
+              <div>
+                <h3 className="text-lg font-medium">
+                  <span className="font-bold text-xl">Title</span> : {d.title}
+                </h3>
+                <h3 className="text-lg font-medium">
+                  <span className="font-bold text-xl">Category</span> : {d.category}
+                </h3>
+                <p className="text-lg">
+                  <span className="font-bold text-xl">Title</span> : {d.shortDes}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-row md:flex-col mt-2 gap-5">
+                <Link to={`/details/${d.blog_id}`}><Button>Details</Button></Link>
+                <Button onClick={() => handleRemove(d._id)}>Remove</Button>
+            </div>
+          </div>
         </div>
-    );
+      ))}
+    </div>
+  );
 };
 
 export default WishList;

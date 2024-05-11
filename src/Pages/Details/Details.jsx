@@ -101,7 +101,7 @@ const Details = () => {
             <h1 className="text-2xl font-semibold text-center">Comment Section</h1>
             <div className="flex flex-col md:flex-row gap-10 mt-5">
               <div className="flex-1">
-                <p className="text-xl font-semibold">All Comments</p>
+                <p className="text-xl font-semibold">All Comments : {dataComment.length}</p>
                 {
                   dataComment.map(com => <div className="border-2 border-[#4D869C] mb-2 p-2 flex gap-3 mt-2 rounded-md" key={com._id}>
                     <div>

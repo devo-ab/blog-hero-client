@@ -34,7 +34,7 @@ const Details = () => {
   }
 
   const dbEmail = data.email;
-  const userEmail = user.email;
+  const userEmail = user?.email;
 
   const showButton = dbEmail === userEmail;
   console.log(dbEmail, userEmail);
@@ -116,7 +116,7 @@ const Details = () => {
               </div>
               <div className="flex-1">
                 {showButton ? (
-                  <p className="text-xl font-semibold text-red-600">
+                  <p className="text-xl font-semibold text-red-600 text-center">
                     You can not comment your own blog
                   </p>
                 ) : (

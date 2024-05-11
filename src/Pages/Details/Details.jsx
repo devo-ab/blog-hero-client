@@ -9,7 +9,7 @@ const Details = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
 
-  const { isPending, data } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ["blogs data"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/blogs/${id}`);
@@ -17,7 +17,7 @@ const Details = () => {
     },
   });
 
-  const { isPending: isLoading, data: dataComment } = useQuery({
+  const {  isLoading : isPending, data: dataComment } = useQuery({
     queryKey: ["comments"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/comments/${id}`);
@@ -25,11 +25,11 @@ const Details = () => {
     },
   });
 
-  if (isPending) {
+  if (isLoading) {
     return <Spinner color="purple" aria-label="Purple spinner example" />;
   }
 
-  if (isLoading) {
+  if (isPending) {
     return <Spinner color="purple" aria-label="Purple spinner example" />;
   }
 
@@ -124,7 +124,7 @@ const Details = () => {
                     <h3 className="text-xl font-semibold">Comments</h3>
                     <form onSubmit={handleSubmit} className="mt-2">
                       <textarea className="w-full border-2 border-[#4D869C] rounded-md" name="comment" id="comment" rows={8}></textarea>
-                      <Button type="submit">Comment</Button>
+                      <Button type="submit">Post Comment</Button>
                     </form>
                   </div>
                 )}

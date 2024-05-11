@@ -1,46 +1,52 @@
 import { Button } from "flowbite-react";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const AddBlog = () => {
+  const { user } = useContext(AuthContext);
 
-  const {user} = useContext(AuthContext);
+  const now = new Date();
+  const currentTime = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const title = form.title.value;
-        const category = form.category.value;
-        const imageUrl = form.imageUrl.value;
-        const shortDes = form.shortDes.value;
-        const longDes = form.longDes.value;
-        const email = user.email;
-        
-        const blogs = {title, category, imageUrl, shortDes, longDes, email};
-        console.log(blogs)
+  const currentDate = new Date().toISOString().split("T")[0];
 
-        fetch('http://localhost:5000/addblogs',{
-          method: "POST",
-          headers: {
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify(blogs)
-        })
-        .then(res => res.json())
-        .then(data => {
-          console.log(data)
-          if(data.insertedId){
-            Swal.fire({
-              title: 'Success!',
-              text: 'Blog Added Successfully',
-              icon: 'success',
-              confirmButtonText: 'OK'
-            })
-          }
-          form.reset();
-        })
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const title = form.title.value;
+    const category = form.category.value;
+    const imageUrl = form.imageUrl.value;
+    const shortDes = form.shortDes.value;
+    const longDes = form.longDes.value;
+    const email = user.email;
+    const blog_time = currentTime;
+    const blog_date = currentDate;
+
+    const blogs = { title, category, imageUrl, shortDes, longDes, email, blog_date, blog_time };
+    console.log(blogs);
+
+    fetch("http://localhost:5000/addblogs", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(blogs),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Blog Added Successfully",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+        }
+        form.reset();
+      });
+  };
 
   return (
     <div className="mt-10">
@@ -50,7 +56,6 @@ const AddBlog = () => {
       <section className="p-6">
         <form onSubmit={handleSubmit} className="container flex flex-col mx-auto space-y-12">
           <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md">
-            
             <div className="grid grid-cols-6 gap-4 col-span-full">
               <div className="col-span-full sm:col-span-3">
                 <label htmlFor="title" className="font-medium">
@@ -69,12 +74,12 @@ const AddBlog = () => {
                   Category
                 </label>
                 <select name="category" id="category" className="w-full rounded-md">
-                    <option value="Lifestyle">Lifestyle</option>
-                    <option value="Technology">Technology</option>
-                    <option value="Food and Cooking">Food and Cooking</option>
-                    <option value="Fitness">Fitness</option>
-                    <option value="Travel">Travel</option>
-                    <option value="Book Reviews">Book Reviews</option>
+                  <option value="Lifestyle">Lifestyle</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Food and Cooking">Food and Cooking</option>
+                  <option value="Fitness">Fitness</option>
+                  <option value="Travel">Travel</option>
+                  <option value="Book Reviews">Book Reviews</option>
                 </select>
               </div>
               <div className="col-span-full sm:col-span-3">
@@ -116,10 +121,11 @@ const AddBlog = () => {
                   className="w-full rounded-md"
                 />
               </div>
-              <Button type="submit" className="col-span-full">Submit</Button>
-              
+              <Button type="submit" className="col-span-full">
+                Submit
+              </Button>
             </div>
-          </fieldset> 
+          </fieldset>
         </form>
       </section>
       {/* from end */}

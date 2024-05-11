@@ -10,7 +10,7 @@ const AllBlogs = () => {
 
   const {user} = useContext(AuthContext);
 
-  const {isPending, data} = useQuery({
+  const {isLoading, data} = useQuery({
     queryKey: ['blogs'],
     queryFn: async () => {
       const res = await fetch('http://localhost:5000/blogs');
@@ -63,7 +63,7 @@ const AllBlogs = () => {
         })
   };
 
-  if(isPending){
+  if(isLoading){
     return <Spinner color="purple" aria-label="Purple spinner example" />;
   }
 

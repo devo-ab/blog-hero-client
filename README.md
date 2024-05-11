@@ -1,8 +1,10 @@
-# React + Vite
+# Blog Hero
+This site live link [Blog Hero](https://blog-hero-c02f7.web.app).
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Feature
+* User friendly design to ensure that the website is easy to navigate and provides a pleasant user experience. 
+* user can comment about the blogs.
+* User can share their experience as blog but they need to create account first. 
+* Website is responsive for all device(mobile, tablet, desktop).
+* User can wishlist blog to read letter.
+* User can update their blog after post.

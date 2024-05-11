@@ -13,7 +13,7 @@ const AllBlogs = () => {
     }
   });
 
-  console.log(data)
+  // console.log(data)
 
   const handleCategory = (e) => {
     const category = e.target.value;

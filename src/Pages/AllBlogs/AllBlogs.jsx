@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { Button, Spinner } from "flowbite-react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 const AllBlogs = () => {
@@ -63,6 +65,15 @@ const AllBlogs = () => {
         })
   };
 
+  useEffect(() => {
+    // Initialize AOS when the component mounts
+    AOS.init({
+      duration: 800, // Animation duration
+      easing: 'ease-in-out', // Animation easing function
+      once: false // Animation occurs only once
+    });
+  }, []);
+
   if(isLoading){
     return <Spinner color="purple" aria-label="Purple spinner example" />;
   }
@@ -87,7 +98,7 @@ const AllBlogs = () => {
           </select>
         </div>
 
-        <form onSubmit={handleSearch} className="flex">
+        <form onSubmit={handleSearch} className="flex gap-5">
           <input
             id="search"
             name="search"
@@ -102,19 +113,19 @@ const AllBlogs = () => {
       {/* Card Generate Here */}
       <div className="mt-5">
         {
-          data.map(d => (<div className="border-2 border-[#4D869C] mb-5 p-4 rounded-md flex flex-col md:flex-row gap-5" key={d._id}>
+          data.map(d => (<div data-aos="zoom-out-up" className="border-2 border-[#4D869C] mb-5 p-4 rounded-md flex flex-col md:flex-row gap-5 bg-[#EEF7FF]" key={d._id}>
             <div>
               <img className="w-96 rounded-md" src={d.imageUrl} alt="" />
             </div>
             <div>
-              <h2 className="text-2xl"><span className="text-xl font-bold">Title</span> : {d.title}</h2>
-              <p className="text-xl"><span className="text-xl font-bold">Category</span> : {d.category}</p>
-              <p className="text-xl"><span className="text-xl font-bold">Short Description</span> : {d.shortDes}</p>
+              <h2 className="text-xl"><span className="text-xl font-semibold">Title</span> : {d.title}</h2>
+              <p className="text-lg"><span className="text-xl font-semibold">Category</span> : {d.category}</p>
+              <p className="text-lg"><span className="text-xl font-semibold">Short Description</span> : {d.shortDes}</p>
 
               {/* button */}
-              <div className="flex gap-4 mt-1">
-              <Link to={`/details/${d._id}`}><Button>Details</Button></Link>
-              <Button onClick={() => handleWishlist(d)}>Wishlist</Button>
+              <div className="flex gap-4 mt-3">
+              <Link to={`/details/${d._id}`}><Button gradientMonochrome="info">Details</Button></Link>
+              <Button outline gradientDuoTone="purpleToBlue" onClick={() => handleWishlist(d)}>Wishlist</Button>
               </div>
             </div>
           </div>))

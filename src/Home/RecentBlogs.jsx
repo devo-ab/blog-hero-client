@@ -57,7 +57,7 @@ const RecentBlogs = () => {
     AOS.init({
       duration: 800, // Animation duration
       easing: 'ease-in-out', // Animation easing function
-      once: true // Animation occurs only once
+      once: false // Animation occurs only once
     });
   }, []);
 

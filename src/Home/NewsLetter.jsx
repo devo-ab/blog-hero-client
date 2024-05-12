@@ -1,5 +1,8 @@
 import { Button } from "flowbite-react";
+import { useEffect } from "react";
 import Swal from "sweetalert2";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const NewsLetter = () => {
 
@@ -18,19 +21,28 @@ const NewsLetter = () => {
         }
     };
 
+    useEffect(() => {
+      // Initialize AOS when the component mounts
+      AOS.init({
+        duration: 800, // Animation duration
+        easing: 'ease-in-out', // Animation easing function
+        once: false // Animation occurs only once
+      });
+    }, []);
+
   return (
     <div className="mt-10">
         <p className="text-4xl text-center font-bold sm:text-6xl">Newsletter Section</p>
       <section>
         <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
-          <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
+          <div data-aos="fade-down-right" className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
             <img
               src="../../public/Business_SVG.svg"
               alt=""
               className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
             />
           </div>
-          <div className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
+          <div data-aos="fade-up-left" className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
             <h1 className="text-5xl font-bold leading-none sm:text-6xl">
               <span className="text-[#4D869C]">Newsletter</span>
             </h1>

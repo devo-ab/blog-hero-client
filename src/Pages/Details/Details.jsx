@@ -1,13 +1,14 @@
 import { Link, useParams } from "react-router-dom";
 import { Button, Spinner } from "flowbite-react";
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
 
 const Details = () => {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
+  const [userComment, setUserComment] = useState([]);
 
   const { isLoading, data } = useQuery({
     queryKey: ["blogs data"],
@@ -17,21 +18,29 @@ const Details = () => {
     },
   });
 
-  const {  isLoading : isPending, data: dataComment } = useQuery({
-    queryKey: ["comments"],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/comments/${id}`);
-      return res.json();
-    },
-  });
+  // const {  isLoading : isPending, data: dataComment } = useQuery({
+  //   queryKey: ["comments"],
+  //   queryFn: async () => {
+  //     const res = await fetch(`http://localhost:5000/comments/${id}`);
+  //     return res.json();
+  //   },
+  // });
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/comments/${id}`)
+    .then((res) => res.json())
+      .then((data) => {
+       setUserComment(data);
+      });
+  },[id]);
 
   if (isLoading) {
     return <Spinner color="purple" aria-label="Purple spinner example" />;
   }
 
-  if (isPending) {
-    return <Spinner color="purple" aria-label="Purple spinner example" />;
-  }
+  // if (isPending) {
+  //   return <Spinner color="purple" aria-label="Purple spinner example" />;
+  // }
 
   const dbEmail = data.email;
   const userEmail = user?.email;
@@ -47,7 +56,7 @@ const Details = () => {
     const user_name = user.displayName;
     const user_image = user.photoURL;
 
-    const userComment = { comment, blogs_id, user_name, user_image };
+    const Comment = { comment, blogs_id, user_name, user_image };
     console.log(userComment);
 
     fetch("http://localhost:5000/comments", {
@@ -55,7 +64,7 @@ const Details = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(userComment),
+      body: JSON.stringify(Comment),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -67,6 +76,7 @@ const Details = () => {
             icon: "success",
             confirmButtonText: "OK",
           });
+          setUserComment([...userComment, Comment])
         }
         form.reset();
       });
@@ -101,9 +111,9 @@ const Details = () => {
             <h1 className="text-2xl font-semibold text-center">Comment Section</h1>
             <div className="flex flex-col md:flex-row gap-10 mt-5">
               <div className="flex-1">
-                <p className="text-xl font-semibold">All Comments : {dataComment.length}</p>
+                <p className="text-xl font-semibold">All Comments : {userComment.length}</p>
                 {
-                  dataComment.map(com => <div className="border-2 border-[#4D869C] mb-2 p-2 flex gap-3 mt-2 rounded-md" key={com._id}>
+                  userComment.map(com => <div className="border-2 border-[#4D869C] mb-2 p-2 flex gap-3 mt-2 rounded-md" key={com._id}>
                     <div>
                       <img className="w-20" src={com.user_image} alt="" />
                     </div>

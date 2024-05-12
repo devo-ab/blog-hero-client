@@ -7,9 +7,10 @@ const AddBlog = () => {
   const { user } = useContext(AuthContext);
 
   const now = new Date();
-  const currentTime = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+  console.log(now)
+  // const currentTime = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 
-  const currentDate = new Date().toISOString().split("T")[0];
+  // const currentDate = new Date().toISOString().split("T")[0];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,10 +21,10 @@ const AddBlog = () => {
     const shortDes = form.shortDes.value;
     const longDes = form.longDes.value;
     const email = user.email;
-    const blog_time = currentTime;
-    const blog_date = currentDate;
+    const blog_time = now;
+    // const blog_date = currentDate;
 
-    const blogs = { title, category, imageUrl, shortDes, longDes, email, blog_date, blog_time };
+    const blogs = { title, category, imageUrl, shortDes, longDes, email, blog_time };
     console.log(blogs);
 
     fetch("http://localhost:5000/addblogs", {

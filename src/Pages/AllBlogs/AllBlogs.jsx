@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Button, Spinner } from "flowbite-react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
@@ -12,26 +12,59 @@ const AllBlogs = () => {
 
   const {user} = useContext(AuthContext);
 
-  const {isLoading, data} = useQuery({
-    queryKey: ['blogs'],
-    queryFn: async () => {
-      const res = await fetch('http://localhost:5000/blogs');
-      return res.json();
-    }
-  });
+  const [allData, setAllData] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [searchText, setSearchText] = useState([]);
+
+  // const {isLoading, data} = useQuery({
+  //   queryKey: ['blogs'],
+  //   queryFn: async () => {
+  //     const res = await fetch('http://localhost:5000/blogs');
+  //     return res.json();
+  //   }
+  // });
+
+  
+
+  
+  console.log('all data set',allData)
 
   // console.log(data)
 
   const handleCategory = (e) => {
     const category = e.target.value;
     console.log(category);
+    setCategory(category);
   };
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/search/${category}`)
+    .then(res => res.json())
+    .then(data => {setAllData(data)})
+  },[category]);
+
+  
+
+  
 
   const handleSearch = (e) => {
     e.preventDefault();
     const title = e.target.search.value;
     console.log(title)
+    setSearchText(title)
   };
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/search/title/${searchText}`)
+    .then(res => res.json())
+    .then(data => {setAllData(data)})
+  },[searchText]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/blogs')
+    .then(res => res.json())
+    .then(data => {setAllData(data)})
+  },[]);
 
   const handleWishlist = (d) => {
     const title = d.title;
@@ -74,9 +107,9 @@ const AllBlogs = () => {
     });
   }, []);
 
-  if(isLoading){
-    return <Spinner color="purple" aria-label="Purple spinner example" />;
-  }
+  // if(isLoading){
+  //   return <Spinner color="purple" aria-label="Purple spinner example" />;
+  // }
 
   return (
     <div className="mt-5">
@@ -89,6 +122,7 @@ const AllBlogs = () => {
             id="category"
             className="w-full rounded-md"
           >
+            <option  >Category</option>
             <option value="Lifestyle">Lifestyle</option>
             <option value="Technology">Technology</option>
             <option value="Food and Cooking">Food and Cooking</option>
@@ -113,7 +147,7 @@ const AllBlogs = () => {
       {/* Card Generate Here */}
       <div className="mt-5">
         {
-          data.map(d => (<div data-aos="zoom-out-up" className="border-2 border-[#4D869C] mb-5 p-4 rounded-md flex flex-col md:flex-row gap-5 bg-[#EEF7FF]" key={d._id}>
+          allData.map(d => (<div data-aos="zoom-out-up" className="border-2 border-[#4D869C] mb-5 p-4 rounded-md flex flex-col md:flex-row gap-5 bg-[#EEF7FF]" key={d._id}>
             <div>
               <img className="w-96 rounded-md" src={d.imageUrl} alt="" />
             </div>

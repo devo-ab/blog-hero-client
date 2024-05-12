@@ -108,21 +108,23 @@ const Details = () => {
           )}
 
           <div className="mt-5">
-            <h1 className="text-2xl font-semibold text-center">Comment Section</h1>
+            <h1 className="text-3xl font-semibold text-center">Comment Section</h1>
             <div className="flex flex-col md:flex-row gap-10 mt-5">
               <div className="flex-1">
                 <p className="text-xl font-semibold">All Comments : {userComment.length}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
                 {
-                  userComment.map(com => <div className="border-2 border-[#4D869C] mb-2 p-2 flex gap-3 mt-2 rounded-md" key={com._id}>
+                  userComment.map(com => <div className="border-2 border-[#4D869C] mb-2 p-2 flex gap-3 rounded-md" key={com._id}>
                     <div>
                       <img className="w-20" src={com.user_image} alt="" />
                     </div>
                     <div>
-                      <h3>{com.user_name}</h3>
-                      <p>{com.comment}</p>
+                      <h3><span className="font-medium">Name</span> : {com.user_name}</h3>
+                      <p><span className="font-medium">Comment</span> : {com.comment}</p>
                     </div>
                   </div>)
                 }
+                </div>
               </div>
               <div className="flex-1">
                 {showButton ? (

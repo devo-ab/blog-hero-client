@@ -35,14 +35,14 @@ const NewsLetter = () => {
         <p className="text-4xl text-center font-bold sm:text-6xl">Newsletter Section</p>
       <section>
         <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
-          <div data-aos="fade-down-right" className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
+          <div data-aos="zoom-in-down" className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
             <img
               src="../../public/Business_SVG.svg"
               alt=""
               className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
             />
           </div>
-          <div data-aos="fade-up-left" className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
+          <div data-aos="zoom-in-up" className="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
             <h1 className="text-5xl font-bold leading-none sm:text-6xl">
               <span className="text-[#4D869C]">Newsletter</span>
             </h1>
@@ -51,7 +51,7 @@ const NewsLetter = () => {
             </p>
             <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
               <form onSubmit={handleSubscribe} className="flex gap-2">
-                <input className="rounded-lg" name="email" id="email" type="email" placeholder="Enter your email" />
+                <input className="rounded-lg" required name="email" id="email" type="email" placeholder="Enter your email" />
                 <Button type="submit">Subscribe</Button>
               </form>
             </div>

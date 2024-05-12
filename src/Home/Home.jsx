@@ -1,22 +1,19 @@
-import { motion, useScroll } from "framer-motion";
 import Banner from "./Banner";
 import NewsLetter from "./NewsLetter";
 import RecentBlogs from "./RecentBlogs";
 import GetInTouch from "../Components/GetInTouch";
+import CustomScrollbar from "./CustomScrollbar";
+// import React from 'react';
 
 const Home = () => {
-  const { scrollYProgress } = useScroll();
-  // const currentTime = new Date();
-  
-
   return (
-    <motion.div>
-      <motion.div style={{ scaleX: scrollYProgress }} />
+    <div>
+      <CustomScrollbar />
       <Banner></Banner>
       <RecentBlogs></RecentBlogs>
       <NewsLetter></NewsLetter>
       <GetInTouch></GetInTouch>
-    </motion.div>
+    </div>
   );
 };
 

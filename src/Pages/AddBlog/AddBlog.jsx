@@ -33,7 +33,7 @@ const AddBlog = () => {
         "content-type": "application/json",
       },
       body: JSON.stringify(blogs),
-    },)
+    }, {credentials: 'include'})
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

@@ -21,7 +21,7 @@ const Banner = () => {
     <div className="mt-10 border-2 border-[#4D869C] rounded-md">
       <div className="relative">
         <img className="w-full rounded-md  bg-gradient-to-r from-[#151515] to-[#15151500]" src="/banner.jpg" alt="" />
-        <div className="absolute top-2 md:top-1/4 left-2 md:left-20 bg-gray-500 bg-opacity-30 p-5">
+        <div className="absolute top-2 md:top-1/4 left-2 md:left-20 md:bg-gray-500 md:bg-opacity-30 p-5">
           <h1 className=" text-2xl md:text-6xl font-bold text-white">
             <span >Welcome To</span>{" "}
             <Typewriter

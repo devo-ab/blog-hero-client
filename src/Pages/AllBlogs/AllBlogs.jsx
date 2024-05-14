@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import { Button, Spinner } from "flowbite-react";
+// import { useQuery } from "@tanstack/react-query";
+import { Button } from "flowbite-react";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
@@ -27,7 +27,7 @@ const AllBlogs = () => {
   
 
   
-  console.log('all data set',allData)
+  // console.log('all data set',allData)
 
   // console.log(data)
 

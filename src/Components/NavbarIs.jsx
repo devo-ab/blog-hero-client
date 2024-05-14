@@ -8,7 +8,7 @@ import {
   NavbarToggle,
 } from "flowbite-react";
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,6 +17,7 @@ import { Tooltip } from "react-tooltip";
 
 const NavbarIs = () => {
   const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const navLinks = (
     <div className="lg:space-x-5  md:space-y-0 flex flex-col lg:flex-row items-center">
@@ -84,6 +85,7 @@ const NavbarIs = () => {
       .then((result) => {
         console.log(result);
         toast("Sign Out successfully");
+        navigate('/')
       })
       .catch((error) => {
         console.log(error);

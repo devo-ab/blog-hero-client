@@ -1,7 +1,7 @@
 // import { useQuery } from "@tanstack/react-query";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProviders";
-import { Button, Spinner } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -11,7 +11,7 @@ const WishList = () => {
   const [dataBlogs, setDataBlogs] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/wishlist/${user?.email}`)
+    fetch(`http://localhost:5000/wishlist/${user?.email}`, {credentials: 'include'})
       .then((res) => res.json())
       .then((data) => {
         setDataBlogs(data);
@@ -39,7 +39,7 @@ const WishList = () => {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Yes, remove it!",
       }).then((result) => {
         if (result.isConfirmed) {
           console.log("delete confirm");

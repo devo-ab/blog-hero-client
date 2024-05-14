@@ -8,9 +8,7 @@ const AddBlog = () => {
 
   const now = new Date();
   console.log(now)
-  // const currentTime = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-
-  // const currentDate = new Date().toISOString().split("T")[0];
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,10 +19,12 @@ const AddBlog = () => {
     const shortDes = form.shortDes.value;
     const longDes = form.longDes.value;
     const email = user.email;
+    const user_name = user.displayName;
+    const user_pro = user.photoURL;
     const blog_time = now;
     // const blog_date = currentDate;
 
-    const blogs = { title, category, imageUrl, shortDes, longDes, email, blog_time };
+    const blogs = { title, category, imageUrl, shortDes, longDes, email, blog_time, user_pro, user_name };
     console.log(blogs);
 
     fetch("http://localhost:5000/addblogs", {
@@ -33,7 +33,7 @@ const AddBlog = () => {
         "content-type": "application/json",
       },
       body: JSON.stringify(blogs),
-    })
+    },)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

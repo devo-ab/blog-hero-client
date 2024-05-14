@@ -20,7 +20,7 @@ const NavbarIs = () => {
   const navigate = useNavigate();
 
   const navLinks = (
-    <div className="lg:space-x-5  md:space-y-0 flex flex-col lg:flex-row items-center">
+    <div className="md:space-x-5  md:space-y-0 flex flex-col md:flex-row items-center">
       <NavLink
         to="/"
         className={({ isActive }) =>

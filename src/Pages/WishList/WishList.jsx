@@ -11,7 +11,7 @@ const WishList = () => {
   const [dataBlogs, setDataBlogs] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/wishlist/${user?.email}`, {credentials: 'include'})
+    fetch(`https://blog-hero-server.vercel.app/wishlist/${user?.email}`, {credentials: 'include'})
       .then((res) => res.json())
       .then((data) => {
         setDataBlogs(data);
@@ -23,7 +23,7 @@ const WishList = () => {
   // const { isLoading, data } = useQuery({
   //   queryKey: ["wishlist"],
   //   queryFn: async () => {
-  //     const res = await fetch(`http://localhost:5000/wishlist/${user?.email}`);
+  //     const res = await fetch(`https://blog-hero-server.vercel.app/wishlist/${user?.email}`);
   //     return res.json();
   //   },
   // });
@@ -31,7 +31,7 @@ const WishList = () => {
   // tanstack query
 
   const handleRemove = (id) => {
-    console.log(id)
+    // console.log(id)
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -42,13 +42,13 @@ const WishList = () => {
         confirmButtonText: "Yes, remove it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          console.log("delete confirm");
-          fetch(`http://localhost:5000/wishlist/${id}`, {
+          // console.log("delete confirm");
+          fetch(`https://blog-hero-server.vercel.app/wishlist/${id}`, {
             method: "DELETE",
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
+              // console.log(data);
               if (data.deletedCount > 0) {
                 Swal.fire({
                   title: "Deleted!",

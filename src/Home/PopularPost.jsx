@@ -7,7 +7,7 @@ const PopularPost = () => {
     const {isLoading, data} = useQuery({
     queryKey: ['popular'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/popular');
+      const res = await fetch('https://blog-hero-server.vercel.app/popular');
       return res.json();
     }
   });

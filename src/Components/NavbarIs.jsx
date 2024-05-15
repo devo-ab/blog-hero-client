@@ -83,12 +83,12 @@ const NavbarIs = () => {
   const handleSingOut = () => {
     logOut()
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         toast("Sign Out successfully");
         navigate('/')
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         toast("Something wrong, please try again");
       });
   };

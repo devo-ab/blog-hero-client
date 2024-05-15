@@ -8,7 +8,7 @@ const GetInTouch = () => {
     const name = form.name.value;
     const email = form.email.value;
     const message = form.message.value;
-    console.log(name, email, message);
+    // console.log(name, email, message);
 
     if (email && name) {
       return Swal.fire({

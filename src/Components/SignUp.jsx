@@ -19,7 +19,7 @@ const SignUp = () => {
     const photo = e.target.photoURL.value;
     const password = e.target.password.value;
 
-    console.log(name, email, photo, password);
+    // console.log(name, email, photo, password);
 
     if (password.length < 6) {
       return toast("Password must be 6 characters");
@@ -42,7 +42,7 @@ const SignUp = () => {
         e.target.reset();
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         toast("Something wrong try again letter");
       });
 

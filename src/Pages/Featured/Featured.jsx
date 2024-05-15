@@ -1,32 +1,32 @@
-import { useQuery } from "@tanstack/react-query";
+
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Spinner } from "flowbite-react";
-import { useState } from "react";
+// import { Spinner } from "flowbite-react";
+import { useEffect, useState } from "react";
 
 
 const Featured = () => {
   
-  const { isLoading, data: getData } = useQuery({
-    queryKey: ["featured"],
-    queryFn: async () => {
-      const res = await fetch("http://localhost:5000/featured");
-      return res.json();
-    },
-  });
-  const [data] = useState(getData);
+  // const { isLoading, data: getData } = useQuery({
+  //   queryKey: ["featured"],
+  //   queryFn: async () => {
+  //     const res = await fetch("https://blog-hero-server.vercel.app/featured");
+  //     return res.json();
+  //   },
+  // });
+  const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/featured")
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     set
-  //   })
-  // },[])
+  useEffect(() => {
+    fetch("https://blog-hero-server.vercel.app/featured")
+    .then(res => res.json())
+    .then(dataF => {
+      setData(dataF)
+    })
+  },[])
   
 
   const columnHelper = createColumnHelper();
@@ -60,9 +60,9 @@ const Featured = () => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  if (isLoading) {
-    return <Spinner aria-label="Default status example" />;
-  }
+  // if (isLoading) {
+  //   return <Spinner aria-label="Default status example" />;
+  // }
 
   return (
     <div className=" mt-10 mb-10">

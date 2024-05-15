@@ -15,7 +15,7 @@ const RecentBlogs = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["blogs"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/recent");
+      const res = await fetch("https://blog-hero-server.vercel.app/recent");
       return res.json();
     },
   });
@@ -29,9 +29,9 @@ const RecentBlogs = () => {
     const userEmail = user?.email;
 
     const wishlist = {title, imageUrl, category, shortDes, userEmail, blog_id};
-    console.log(wishlist)
+    // console.log(wishlist)
 
-    fetch('http://localhost:5000/wishlist',{
+    fetch('https://blog-hero-server.vercel.app/wishlist',{
       method: "POST",
       headers:{
         'content-type' : 'application/json'
@@ -40,7 +40,7 @@ const RecentBlogs = () => {
     })
     .then(res => res.json())
         .then(data => {
-          console.log(data)
+          // console.log(data)
           if(data.insertedId){
             Swal.fire({
               title: 'Success!',

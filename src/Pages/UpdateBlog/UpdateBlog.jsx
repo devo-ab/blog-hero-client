@@ -10,7 +10,7 @@ const UpdateBlog = () => {
   const { isPending, data } = useQuery({
     queryKey: ["blogs data"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/blogs/${id}`);
+      const res = await fetch(`https://blog-hero-server.vercel.app/blogs/${id}`);
       return res.json();
     },
   });
@@ -28,11 +28,11 @@ const UpdateBlog = () => {
         const imageUrl = form.imageUrl.value;
         const shortDes = form.shortDes.value;
         const longDes = form.longDes.value;
-        console.log(title, category, imageUrl, shortDes, longDes)
+        // console.log(title, category, imageUrl, shortDes, longDes)
 
         const updatedBlogs = {title, category, imageUrl, shortDes, longDes};
 
-        fetch(`http://localhost:5000/blogsUpdate/${id}`,{
+        fetch(`https://blog-hero-server.vercel.app/blogsUpdate/${id}`,{
           method: "PUT",
           headers:{
             'content-type' : 'application/json'
@@ -41,7 +41,7 @@ const UpdateBlog = () => {
         })
         .then(res => res.json())
         .then(data => {
-          console.log(data)
+          // console.log(data)
           if(data.modifiedCount){
             Swal.fire({
               title: 'Success!',

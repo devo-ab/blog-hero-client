@@ -7,7 +7,7 @@ const AddBlog = () => {
   const { user } = useContext(AuthContext);
 
   const now = new Date();
-  console.log(now)
+  // console.log(now)
   
 
   const handleSubmit = (e) => {
@@ -25,9 +25,9 @@ const AddBlog = () => {
     // const blog_date = currentDate;
 
     const blogs = { title, category, imageUrl, shortDes, longDes, email, blog_time, user_pro, user_name };
-    console.log(blogs);
+    // console.log(blogs);
 
-    fetch("http://localhost:5000/addblogs", {
+    fetch("https://blog-hero-server.vercel.app/addblogs", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -36,7 +36,7 @@ const AddBlog = () => {
     }, {credentials: 'include'})
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.insertedId) {
           Swal.fire({
             title: "Success!",

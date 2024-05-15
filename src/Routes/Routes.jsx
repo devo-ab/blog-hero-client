@@ -53,7 +53,7 @@ const router = createBrowserRouter([
       {
         path: "/update/:id",
         element: <PrivateRoutes><UpdateBlog></UpdateBlog></PrivateRoutes>,
-        // loader: ({params}) => fetch(`http://localhost:5000/blogs/${params.id}`)
+        // loader: ({params}) => fetch(`https://blog-hero-server.vercel.app/blogs/${params.id}`)
       }
     ],
   },

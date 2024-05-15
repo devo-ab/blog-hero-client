@@ -16,7 +16,7 @@ const PrivateRoutes = ({ children }) => {
   // const loggedUser = { email: userEmail };
 
   if (user) {
-    // axios.post("http://localhost:5000/jwt", loggedUser, { withCredentials: true }).then((res) => {
+    // axios.post("https://blog-hero-server.vercel.app/jwt", loggedUser, { withCredentials: true }).then((res) => {
     //   console.log("token response", res.data);
     // });
 

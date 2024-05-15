@@ -18,17 +18,17 @@ const handleSignIn = e => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password)
+    // console.log(email, password)
 
     signInWithEmailPass(email, password)
     .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         toast("Sign In Successfully");
         navigate(location?.state? location.state : '/');
         e.target.reset();
       })
       .catch((error) => {
-        console.log(error)
+        // console.log(error)
         toast("Please enter valid email and password");
       })
 };
@@ -37,12 +37,12 @@ const handleSignIn = e => {
 const handleGoogleSignIn = () => {
     signInWithGoogle()
     .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         toast("Google sign in successfully");
         navigate(location?.state? location.state : '/');
       })
       .catch((error) => {
-        console.log(error)
+        // console.log(error)
         toast("Something wrong, please try again");
       })
 };
@@ -51,12 +51,12 @@ const handleGoogleSignIn = () => {
 const handleTwitterSignIn = () => {
     signInWithTwitter()
     .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         toast("Twitter sign in successfully");
         navigate(location?.state? location.state : '/');
       })
       .catch((error) => {
-        console.log(error)
+        // console.log(error)
         toast("Something wrong, please try again");
       })
 };
@@ -64,12 +64,12 @@ const handleTwitterSignIn = () => {
 const handleGithubSignIn = () => {
     signInWithGithub()
     .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         toast("Github sign in successfully");
         navigate(location?.state? location.state : '/');
       })
       .catch((error) => {
-        console.log(error)
+        // console.log(error)
         toast("Something wrong, please try again");
       })
 };

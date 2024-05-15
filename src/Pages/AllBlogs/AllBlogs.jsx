@@ -19,7 +19,7 @@ const AllBlogs = () => {
   // const {isLoading, data} = useQuery({
   //   queryKey: ['blogs'],
   //   queryFn: async () => {
-  //     const res = await fetch('http://localhost:5000/blogs');
+  //     const res = await fetch('https://blog-hero-server.vercel.app/blogs');
   //     return res.json();
   //   }
   // });
@@ -33,12 +33,12 @@ const AllBlogs = () => {
 
   const handleCategory = (e) => {
     const category = e.target.value;
-    console.log(category);
+    // console.log(category);
     setCategory(category);
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/search/${category}`)
+    fetch(`https://blog-hero-server.vercel.app/search/${category}`)
     .then(res => res.json())
     .then(data => {setAllData(data)})
   },[category]);
@@ -50,18 +50,18 @@ const AllBlogs = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     const title = e.target.search.value;
-    console.log(title)
+    // console.log(title)
     setSearchText(title)
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/search/title/${searchText}`)
+    fetch(`https://blog-hero-server.vercel.app/search/title/${searchText}`)
     .then(res => res.json())
     .then(data => {setAllData(data)})
   },[searchText]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/blogs')
+    fetch('https://blog-hero-server.vercel.app/blogs')
     .then(res => res.json())
     .then(data => {setAllData(data)})
   },[]);
@@ -75,9 +75,9 @@ const AllBlogs = () => {
     const userEmail = user?.email;
 
     const wishlist = {title, imageUrl, category, shortDes, userEmail, blog_id};
-    console.log(wishlist)
+    // console.log(wishlist)
 
-    fetch('http://localhost:5000/wishlist',{
+    fetch('https://blog-hero-server.vercel.app/wishlist',{
       method: "POST",
       headers:{
         'content-type' : 'application/json'
@@ -86,7 +86,7 @@ const AllBlogs = () => {
     })
     .then(res => res.json())
         .then(data => {
-          console.log(data)
+          // console.log(data)
           if(data.insertedId){
             Swal.fire({
               title: 'Success!',

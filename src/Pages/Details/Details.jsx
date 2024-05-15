@@ -13,7 +13,7 @@ const Details = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["blogs data"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/blogs/${id}`);
+      const res = await fetch(`https://blog-hero-server.vercel.app/blogs/${id}`);
       return res.json();
     },
   });
@@ -21,13 +21,13 @@ const Details = () => {
   // const {  isLoading : isPending, data: dataComment } = useQuery({
   //   queryKey: ["comments"],
   //   queryFn: async () => {
-  //     const res = await fetch(`http://localhost:5000/comments/${id}`);
+  //     const res = await fetch(`https://blog-hero-server.vercel.app/comments/${id}`);
   //     return res.json();
   //   },
   // });
 
   useEffect(() => {
-    fetch(`http://localhost:5000/comments/${id}`)
+    fetch(`https://blog-hero-server.vercel.app/comments/${id}`)
     .then((res) => res.json())
       .then((data) => {
        setUserComment(data);
@@ -46,7 +46,7 @@ const Details = () => {
   const userEmail = user?.email;
 
   const showButton = dbEmail === userEmail;
-  console.log(dbEmail, userEmail);
+  // console.log(dbEmail, userEmail);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,9 +57,9 @@ const Details = () => {
     const user_image = user.photoURL;
 
     const Comment = { comment, blogs_id, user_name, user_image };
-    console.log(userComment);
+    // console.log(userComment);
 
-    fetch("http://localhost:5000/comments", {
+    fetch("https://blog-hero-server.vercel.app/comments", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -68,7 +68,7 @@ const Details = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.insertedId) {
           Swal.fire({
             title: "Success!",

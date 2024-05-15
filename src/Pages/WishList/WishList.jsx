@@ -51,7 +51,7 @@ const WishList = () => {
               // console.log(data);
               if (data.deletedCount > 0) {
                 Swal.fire({
-                  title: "Deleted!",
+                  title: "Removed!",
                   text: "Your file has been remove.",
                   icon: "success",
                 });

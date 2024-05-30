@@ -46,7 +46,7 @@ const Details = () => {
   //   return <Spinner color="purple" aria-label="Purple spinner example" />;
   // }
 
-  const dbEmail = data.email;
+  const dbEmail = data?.email;
   const userEmail = user?.email;
 
   const showButton = dbEmail === userEmail;
@@ -108,7 +108,7 @@ const Details = () => {
           icon: "success",
           confirmButtonText: "OK",
         });
-        const remaining = userComment.filter((comment) => comment._id !== id);
+        const remaining = userComment.filter((comment) => comment._id !== com._id);
         setUserComment(remaining);
       }
     })

@@ -15,7 +15,7 @@ const Details = () => {
   const [userComment, setUserComment] = useState([]);
   console.log(rating);
 
-  const { isLoading, data } = useQuery({
+  const { isLoading, data} = useQuery({
     queryKey: ["blogs data"],
     queryFn: async () => {
       const res = await fetch(`https://blog-hero-server.vercel.app/blogs/${id}`);
@@ -23,7 +23,7 @@ const Details = () => {
     },
   });
 
-  // const {  isLoading : isPending, data: dataComment } = useQuery({
+  // const {  isLoading : isPending, data: userComment } = useQuery({
   //   queryKey: ["comments"],
   //   queryFn: async () => {
   //     const res = await fetch(`https://blog-hero-server.vercel.app/comments/${id}`);
@@ -40,9 +40,7 @@ const Details = () => {
   },[id]);
 
 
-  if (isLoading) {
-    return <Spinner color="purple" aria-label="Purple spinner example" />;
-  }
+  
 
   // if (isPending) {
   //   return <Spinner color="purple" aria-label="Purple spinner example" />;
@@ -94,7 +92,7 @@ const Details = () => {
   };
 
   const handleCommentDelete = (com) => {
-    fetch(`http://localhost:5000/comments/${com._id}`, {
+    fetch(`https://blog-hero-server.vercel.app/comments/${com?._id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -116,6 +114,9 @@ const Details = () => {
     })
   };
 
+  if (isLoading) {
+    return <Spinner color="purple" aria-label="Purple spinner example" />;
+  }
   return (
     <div className="mt-10">
       <h1 className="text-2xl font-bold text-center">Details Blog page</h1>

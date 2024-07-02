@@ -1,7 +1,7 @@
 # Blog Hero
-Discripton : This is a blog website,here user can post bolg and read blog.
+# Discripton : This is a blog website,here user can post bolg and read blog.
 This site live link [Blog Hero](https://blog-hero-c02f7.web.app).
-Technology: React, Taildwind CSS, Firebase, Express.js, MongoDB.
+# Technology: React, Taildwind CSS, Firebase, Express.js, MongoDB.
 
 
 ### Feature
